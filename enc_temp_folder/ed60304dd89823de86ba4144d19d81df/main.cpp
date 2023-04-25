@@ -610,15 +610,13 @@ int main() {
                             int keyType;
                             cin >> keyType;
 
-                          
+                            keyinsertText();
+
+                            int userinputKey;
+
+                            cin >> userinputKey;
 
                             if (keyType == 1) {
-
-                                keyinsertText();
-
-                                int userinputKey;
-
-                                cin >> userinputKey;
 
                                 int contador = 0;
 
@@ -701,7 +699,7 @@ int main() {
                                     }
                                 }
                             }
-                            else if (keyType == 2) {
+                            else if (keyType == 2 && isalpha(userinputKey)) {
 
                                 //decrypt(cipherCode, userinputKey);
 
