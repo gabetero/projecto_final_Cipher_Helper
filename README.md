@@ -8,7 +8,7 @@
 ## Ciphers
   The types of ciphers available are the following:
   - Shift Cipher
-  - Polymorphic Cipher
+  - Rail Fence Cipher
   - Ceasar Cipher
   
 ## Shift Cipher
@@ -17,5 +17,5 @@
 ## Ceasar Cipher
 The Caesar cipher is a shift cipher, usually presented with a shift key of value 3.
 
-## Polymorphic Cipher
-In polymorphic encryption, the algorithm, the encryption/decryption pair, changes each time it is used.
+## Rail Fence Cipher
+The rail fence cipher (also called a zigzag cipher) is a form of transposition cipher. It derives its name from the way in which it is encoded. 
