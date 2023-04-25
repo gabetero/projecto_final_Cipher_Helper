@@ -1,6 +1,6 @@
 # Group Proyect: CipherHelper
 
-  This group program was designed to provide the means to encript/decript messages the User enters.  There are currently three kinds of ciphers available for the user. .
+  This group program was designed to provide the means to encript/decript messages the User enters.  There are currently three kinds of ciphers available for the user.
   
 ## Features
   The user can currently choose between Encrypting and Decrypting the message he/she desires. Another feature we included is Hash Account Authentication.
