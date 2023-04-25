@@ -17,5 +17,5 @@
 ## Ceasar Cipher
 The Caesar cipher is a shift cipher, usually presented with a shift key of value 3.
 
-## Rail Fence Cipher
-The rail fence cipher (also called a zigzag cipher) is a form of transposition cipher. It derives its name from the way in which it is encoded. 
+## Vigenere Cipher
+Vigenere cipher is a polyalphabetic substitution cipher that encrypt plaintext by shifting each character by a fixed number of positions determined by a key.
