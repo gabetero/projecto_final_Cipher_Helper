@@ -3,8 +3,8 @@
   This group program was designed to provide the means to encript/decript messages the User enters.  There are currently three kinds of ciphers available for the user.
   
 ## Features
-  The user can currently choose between Encrypting and Decrypting the message he/she desires. Another feature we included is Hash Account Authentication.
-
+  The user can currently choose between Encrypting and Decrypting the message they desire. Another feature we included is Hash Account Authentication, storing it in a text file.
+  
 ## Ciphers
   The types of ciphers available are the following:
   - Shift Cipher
