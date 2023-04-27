@@ -19,11 +19,11 @@ const string USERNAME_FILE = "username.txt";
 
 // Esta funcion covierte el password a hash
 string HashPassword(const string& password) {
-    SHA256 hash;
-    string digest;
-    StringSource(password, true,
+    SHA256 hash; // Se usa la instancia SHA 256 para convertir el password a un valor en hash.
+    string digest; // variable para guardar el hash en hexadecimal
+    StringSource(password, true, // string source toma el password y lo establece como la fuente de datos para el hash. true indica que input ser enviado al pipeline de los filtros todo de una vez.
         new HashFilter(hash, new HexEncoder(new StringSink(digest))));
-    return digest;
+    return digest; // HashFilter calcula el valor de hash del input, lo manda a HexEnconder lo convierte de binario a hexadecimal para que el manejo sea mas eficiente. StringSink se usa para guardar el hash resultante en el string digest y luego la funcion devuelve el hash que representa al password.
 }
 
 // Esta funcion guarda el hash al file
@@ -606,7 +606,7 @@ int main() {
 
 
                             }
-                            else if (keyType == 2) {
+                            else if (keyType == 2) { //si el tipo de llave es de caracter se realiza el decrypt de vigenere 
 
                                 cin.ignore();
 
