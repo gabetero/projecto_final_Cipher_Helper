@@ -35,7 +35,7 @@ void SavePassword(const string& password) {
 
     if (fout) {
 
-        fout << hashMake<<endl;
+        fout << hashMake << endl;
         cout << "Password guardado!" << endl;
     }
     else {
@@ -66,7 +66,7 @@ void SaveUsername(const string& username) {
 
     if (fout) {
 
-        fout << username<<endl;
+        fout << username << endl;
         cout << "Username guardado!" << endl;
     }
     else {
@@ -94,10 +94,10 @@ string ReadUsername() {
 bool VerifyPassword(const string& username, const string& password) {
 
     string hashed_password = ReadPassword();
-    
+
 
     string new_hash = HashPassword(password);
-  
+
 
     if (new_hash == hashed_password) {
 
@@ -170,44 +170,51 @@ char shiftCeasar(char d) {
     return d;
 }
 
+
+
+
+
+
 string encrypt(string plaintext, string keyVig) {
-
     string ciphertext = "";
-
     int keylen = keyVig.length();
     int j = 0;  // index into key
 
     for (int i = 0; i < plaintext.length(); i++) {
-
         char c = plaintext[i];
 
         if (isalpha(c)) {
-
             c = toupper(c);  // convert to uppercase for simplicity
             int shift = keyVig[j] - 'A';  // convert key letter to shift amount
             c = ((c - 'A' + shift) % 26) + 'A';  // apply shift and convert back to letter
             j = (j + 1) % keylen;  // move to next key letter
+        }
+        else if (c == ' ') {
+            ciphertext += ' '; // add space to ciphertext
+            continue; // skip processing spaces
         }
         ciphertext += c;
     }
     return ciphertext;
 }
 
-string decrypt(string cipherCode, string userinputKey) {
+string decrypt(string cipherCode, string inputkeyVig) {
 
     string plaintext = "";
-
-    int keylen = userinputKey.length();
+    int keylen = inputkeyVig.length();
     int j = 0;  // index into key
 
     for (int i = 0; i < cipherCode.length(); i++) {
-
         char c = cipherCode[i];
         if (isalpha(c)) {
             c = toupper(c);  // convert to uppercase for simplicity
-            int shift = userinputKey[j] - 'A';  // convert key letter to shift amount
+            int shift = inputkeyVig[j] - 'A';  // convert key letter to shift amount
             c = (((c - 'A' - shift) % 26) + 26) % 26 + 'A';  // apply shift and convert back to letter
             j = (j + 1) % keylen;  // move to next key letter
+        }
+        else if (c == ' ') {
+            plaintext += ' '; // add space back to plaintext
+            continue;
         }
         plaintext += c;
     }
@@ -217,27 +224,33 @@ string decrypt(string cipherCode, string userinputKey) {
 
 
 
-
-
 void loginMenu() {
+    system("cls");
 
-        system("cls");
-        cout << "==========================" << endl;
-        cout << "         LOGIN MENU        " << endl;
-        cout << "==========================" << endl;
-        cout << "Select an option:" << endl;
-        cout << "(1) Create Account" << endl;
-        cout << "(2) Log In" << endl;
-        cout << "(3) Exit" << endl;
-        cout << "==========================" << endl;
-   
+    string lectorLinea;
+    ifstream MyreadFile("portada.txt");
+    while (getline(MyreadFile, lectorLinea)) {
+        cout << lectorLinea << "\n";
+    }
+    MyreadFile.close();
+
+    cout << R"(
+                 ==========================
+                         LOGIN MENU        
+                 ==========================
+                        Select an option:
+                        (1) Create Account
+                        (2) Log In
+                        (3) Exit
+                 ==========================)" << endl;
+
 
 }
 
 void principalMenu() {
 
     system("cls");
-    
+
     cout << "==========================" << endl;
     cout << "    MENU CYPHER HELP        " << endl;
     cout << "==========================" << endl;
@@ -246,8 +259,6 @@ void principalMenu() {
     cout << "(2) Desifrar" << endl;
     cout << "(3) Log out" << endl;
     cout << "==========================" << endl;
-
-
 }
 
 void cipherMenu() {
@@ -261,21 +272,25 @@ void cipherMenu() {
     cout << "(1) Shift Cipher" << endl;
     cout << "(2) Vigenere Cipher" << endl;
     cout << "(3) Ceasar Cipher  " << endl;
-    cout << "(4) Rail Fence Cipher   " << endl;
     cout << "==========================" << endl;
-
-
 }
 
 void insertText() {
-    
+
     system("cls");
     cout << "==========================" << endl;
     cout << " INSERTE PALABRA A CIFRAR    " << endl;
     cout << "==========================" << endl;
-    cout << "-->";
-    
+    cout << "--> ";
+}
 
+void insertTextDecipher() {
+
+    system("cls");
+    cout << "==========================" << endl;
+    cout << "INSERTE PALABRA A DESIFRAR   " << endl;
+    cout << "==========================" << endl;
+    cout << "--> ";
 }
 
 void keyinsertText() {
@@ -284,9 +299,7 @@ void keyinsertText() {
     cout << "==========================" << endl;
     cout << "      INSERTE LLAVE   " << endl;
     cout << "==========================" << endl;
-    cout << "-->";
-
-
+    cout << "--> ";
 }
 
 void userText() {
@@ -295,9 +308,7 @@ void userText() {
     cout << "==========================" << endl;
     cout << "      INSERTE USERNAME   " << endl;
     cout << "==========================" << endl;
-    cout << "-->";
-
-
+    cout << "--> ";
 }
 
 void passText() {
@@ -306,14 +317,42 @@ void passText() {
     cout << "==========================" << endl;
     cout << "     INSERTE PASSWORD   " << endl;
     cout << "==========================" << endl;
-    cout << "-->";
+    cout << "--> ";
+}
 
+void bruteforceMenu() {
+
+    system("cls");
+    cout << "==========================" << endl;
+    cout << "DE CLICK A CUALQUIER TECLA   " << endl;
+    cout << " PARA REALIZAR UN ATAQUE   " << endl;
+    cout << "     DE FUERZA BRUTA   " << endl;
+    cout << "==========================" << endl;
 
 }
 
+void tipollaveMenu() {
+
+    system("cls");
+    cout << "==========================" << endl;
+    cout << "  INSERTE TIPO DE LLAVE   " << endl;
+    cout << "==========================" << endl;
+    cout << "Seleccione el tipo de llave" << endl;
+    cout << "(1) numerico" << endl;
+    cout << "(2) caracter" << endl;
+    cout << "--> ";
+}
+
+
+void outputcipher() {
+
+    system("cls");
+    cout << "==========================" << endl;
+    cout << "  SU PALABRA CIFRADA ES    " << endl;
+    cout << "==========================" << endl;
+    cout << "--> ";
+}
 int main() {
-
-
     int choice;
     do {
 
@@ -331,8 +370,8 @@ int main() {
             if (usernameExists(username)) {
 
                 cout << "El username ya existe" << endl;
+                system("pause");
 
-               
             }
             else {
 
@@ -346,9 +385,8 @@ int main() {
                 SavePassword(password);
             }
 
-           
 
-           
+
         }
         case 2: {
 
@@ -357,13 +395,11 @@ int main() {
             userText();
             cin >> username;
 
-
-
             if (!usernameExists(username)) {
 
-                cout << "El username no existe" << endl;
+                cout << "El username no existe, favor de crear uno" << endl;
 
-
+                system("pause");
 
             }
             else {
@@ -405,28 +441,28 @@ int main() {
 
                             switch (cipherChoice) {
 
-                               case 1: {
+                            case 1: {
 
-                                 insertText();
+                                insertText();
 
-                                 string input;
-                                 getline(cin, input); // read a line of input
+                                string input;
+                                getline(cin, input); // read a line of input
 
-                                 int key;
+                                int key;
 
-                                 system("cls");
+                                system("cls");
 
-                                 keyinsertText();
+                                keyinsertText();
 
-                                 cin >> key;
+                                cin >> key;
 
 
-                                 vector<char> cipherText;
-                                 vector<char> bruteForce;
+                                vector<char> cipherText;
+                                vector<char> bruteForce;
 
                                 // loop over the characters in the input string
 
-                                  for (char c : input) {
+                                for (char c : input) {
 
 
                                     // shift the character by the random amount
@@ -436,46 +472,39 @@ int main() {
                                     cipherText.push_back(shifted);
 
 
-                                  }
+                                }
 
-                                cout << "Su palabra cifrada es: ";
-                                // print the shifted message
-                                  for (char c : cipherText) {
+                                outputcipher();
+
+                                for (char c : cipherText) {
 
                                     cout << c;
-                                  }
-
-                                 cout << endl << "Apunte su cifrado" << endl;
-                                 cout << "Presiona cualquier letra para continuar a nuestro menu principal" << endl;
-
+                                }
+                                cout << endl;
                                 system("pause");//funcion para esperar key input para continuar
 
-                                system("cls");
-                                //menu log in
 
 
                                 break;
 
-                               }
+                            }
 
                             case 2: {
 
-                                string plaintext, keyVig;
+                                string plaintext, key;
 
                                 insertText();
-                                cin >> plaintext;
+                                getline(cin, plaintext);
 
                                 keyinsertText();
-                                cin >> keyVig;
+                                getline(cin, key);
 
-                                string ciphertext = encrypt(plaintext, keyVig);
-                                cout << "Plaintext: " << plaintext << endl;
-                                cout << "Key: " << keyVig << endl;
-                                cout << "Ciphertext: " << ciphertext << endl;
+                                string ciphertext = encrypt(plaintext, key);
 
+                                outputcipher();
+                                cout << ciphertext << endl;
                                 system("pause");//funcion para esperar key input para continuar
 
-                                system("cls");
 
                                 break;
 
@@ -483,19 +512,11 @@ int main() {
 
                             case 3: {
 
-                                 
+
                                 insertText();
 
                                 string input;
                                 getline(cin, input); // read a line of input
-
-                                int key;
-
-   
-                                keyinsertText();
-
-
-                                cin >> key;
 
 
                                 vector<char> cipherText;
@@ -512,11 +533,7 @@ int main() {
                                     ceasarText.push_back(shifting);
 
                                 }
-                                cout << "                    + ------------------------------------------------------------- + " << endl;
-                                cout << "                    |  Dale click a cualquier tecla para proceder al menu principal |" << endl;
-                                cout << "                    |                   Recuerde guardar su cifrado                 | " << endl;
-                                cout << "                    + ------------------------------------------------------------- +" << endl;
-                                cout << "\n\n                               Su palabra cifrada es: ";
+                                outputcipher();
                                 for (char d : ceasarText) {
 
                                     cout << d;
@@ -527,64 +544,10 @@ int main() {
 
                                 system("pause");//funcion para esperar key input para continuar
 
-                                system("cls");
 
                                 break;
                             }
-                            case 4: {
-                                string inputRail;
-                                int keyRail;
-                                cout << "Enter the message you want to encrypt: ";
-                                getline(cin, inputRail);
 
-                                keyinsertText();
-                                cin >> keyRail;
-
-                                if (keyRail <= 1) {
-                                    cout << "Error: Invalid key value." << endl;
-                                    return 0;
-                                }
-
-                                int len = inputRail.length();
-
-                                vector<vector<char>> rail(keyRail, vector<char>(len, '.'));
-                                bool dir_down = false;
-                                int row = 0, col = 0;
-
-                                for (int i = 0; i < len; i++) {
-                                    if (row == 0 || row == keyRail - 1) {
-                                        dir_down = !dir_down;
-                                    }
-                                    rail[row][col] = inputRail[i];
-                                    col++;
-                                    if (dir_down) {
-                                        row++;
-                                    }
-                                    else {
-                                        row--;
-                                    }
-                                }
-
-                                string encrypted;
-                                row = 0, col = 0;
-
-                                for (int i = 0; i < len; i++) {
-                                    if (row == 0 || row == keyRail - 1) {
-                                        dir_down = !dir_down;
-                                    }
-                                    encrypted += rail[row][col];
-                                    col++;
-                                    if (dir_down) {
-                                        row++;
-                                    }
-                                    else {
-                                        row--;
-                                    }
-                                }
-
-                                cout << "Encrypted message: " << encrypted << endl;
-                                system("pause");
-                            }
                             }
 
                             break;
@@ -592,119 +555,72 @@ int main() {
                         }
                         case 2: {
 
+                            //DECIPHERING CASE
                             cin.ignore();
-
-                            insertText();
-
+                            insertTextDecipher();
                             string cipherCode;
 
                             getline(cin, cipherCode);
 
-                          
-                            
-
-                            cout << "Seleccione el tipo de llave" << endl;
-                            cout << "(1) numerico" << endl;
-                            cout << "(2) caracter" << endl;
+                            tipollaveMenu();
 
                             int keyType;
                             cin >> keyType;
 
-                          
 
                             if (keyType == 1) {
 
-                                keyinsertText();
-
-                                int userinputKey;
-
-                                cin >> userinputKey;
-
-                                int contador = 0;
-
-                                while (contador <= 1) {//se utiliza loop bool para validacion de user input(y/n)
 
 
-                                    cout << endl << "Sabe usted la llave de su cifrado? (Y/N)\n--->";
+                                bruteforceMenu();
+                                system("pause");
+                                system("cls");
 
-                                    char userInput;
-                                    cin >> userInput;
+                                for (int x = 1; x <= 25; x++) {
 
-                                    if (toupper(userInput) == 'Y') {
+                                    cout << "Shift #" << x << ":";
 
-                                        contador = 2;//salir del loop de validacion de input
+                                    for (char c : cipherCode) {
 
-                                        for (char c : cipherCode) {
+                                        if (isalpha(c)) {//se verifica si es una letra para proceder al cifrado de la misma
 
-                                            if (isalpha(c)) {//se verifica si es una letra para proceder al cifrado de la misma
+                                            if (isupper(c)) {//se utiliza isupper para verificar si la palabra es mayuscula
 
-                                                if (isupper(c)) {//se utiliza isupper para verificar si la palabra es mayuscula
+                                                c = ((c - 'A') + x) % 26 + 'A';
+                                            }
+                                            else if (islower(c)) {//se utiliza islower para verificar si la palabra es minuscula
 
-                                                    c = ((c - 'A') + userinputKey) % 26 + 'A';
-                                                }
-                                                else if (islower(c)) {//se utiliza islower para verificar si la palabra es minuscula
-
-                                                    c = ((c - 'a') + userinputKey) % 26 + 'a';
-                                                }
-
+                                                c = ((c - 'a') + x) % 26 + 'a';
                                             }
 
-                                            cout << c;
-
-
-
                                         }
-                                    }
-                                    else if (toupper(userInput) == 'N') {
-
-                                        contador = 2;
-
-                                        system("CLS");
-                                        cout << "+ -------------------------------------------------------------------------------------------------------------- + " << endl;
-                                        cout << "|     No te preocupes, podemos realizar un ataque de fuerza bruta que nos de todas las convinaciones posibles    |" << endl;
-                                        cout << "|                           Dale click a cualquier tecla para proceder con el ataque                             |" << endl;
-                                        cout << "+ -------------------------------------------------------------------------------------------------------------- +" << endl;
-
-                                        system("pause");
-                                        system("cls");
-
-                                        for (int x = 1; x <= 25; x++) {
-
-                                            cout << "Shift #" << x << ":";
-
-                                            for (char c : cipherCode) {
-
-                                                if (isalpha(c)) {//se verifica si es una letra para proceder al cifrado de la misma
-
-                                                    if (isupper(c)) {//se utiliza isupper para verificar si la palabra es mayuscula
-
-                                                        c = ((c - 'A') + x) % 26 + 'A';
-                                                    }
-                                                    else if (islower(c)) {//se utiliza islower para verificar si la palabra es minuscula
-
-                                                        c = ((c - 'a') + x) % 26 + 'a';
-                                                    }
-
-                                                }
 
 
 
-                                                cout << c;
-
-                                            }
-                                            cout << endl;
-                                        }
-                                    }
-                                    else {
-                                        cout << "Error, favor de intentar de nuevo";
+                                        cout << c;
 
                                     }
+                                    cout << endl;
                                 }
+
+
+
                             }
                             else if (keyType == 2) {
 
-                                //decrypt(cipherCode, userinputKey);
+                                cin.ignore();
 
+                                keyinsertText();
+
+
+                                string userinputkeyVig;
+
+                                getline(cin, userinputkeyVig);
+
+                                string vigOut = decrypt(cipherCode, userinputkeyVig);
+
+
+                                cout << vigOut << endl;
                             }
 
 
@@ -722,13 +638,10 @@ int main() {
 
             }
 
-            }
-
-
-        
+        }
 
         }
 
 
-    }while (choice != 3);
+    } while (choice != 3);
 }
