@@ -8,7 +8,7 @@
 ## Ciphers
   The types of ciphers available are the following:
   - Shift Cipher
-  - Rail Fence Cipher
+  - Vigenere Cipher
   - Ceasar Cipher
   
 ## Shift Cipher
