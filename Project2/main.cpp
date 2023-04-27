@@ -411,8 +411,8 @@ int main() {
                 if (result == false) {
 
                     cout << "Password incorrecto" << endl;
-
-                    system("cls");
+                    system("pause");
+                   
 
 
                 }
