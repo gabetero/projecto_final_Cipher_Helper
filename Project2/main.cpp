@@ -334,12 +334,12 @@ void bruteforceMenu() {
 void tipollaveMenu() {
 
     system("cls");
-    cout << "==========================" << endl;
-    cout << "  INSERTE TIPO DE LLAVE   " << endl;
-    cout << "==========================" << endl;
-    cout << "Seleccione el tipo de llave" << endl;
-    cout << "(1) numerico" << endl;
-    cout << "(2) caracter" << endl;
+    cout << "=======================================" << endl;
+    cout << "        INSERTE TIPO DE LLAVE   " << endl;
+    cout << "=======================================" << endl;
+    cout << "Seleccione el tipo de cifrado" << endl;
+    cout << "(1) Shift key, Ceasar Cipher (numerico)" << endl;
+    cout << "(2) Vigenere Cipher (caracter)" << endl;
     cout << "--> ";
 }
 
